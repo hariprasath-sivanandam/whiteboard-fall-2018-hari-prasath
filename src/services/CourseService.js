@@ -92,7 +92,7 @@ let courses = [
         modules: []
     }
 ]
-export default class CourseServiceSingleton {
+export default class CourseService {
     static findWidgetsForTopic = forTopic => {
         for(let c in courses) {
             for(let m in courses[c].modules) {
