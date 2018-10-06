@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import CourseTable from "./CourseTable";
+import CourseGrid from "./CourseGrid";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseService from "../services/CourseService";
+import CourseEditor from "./CourseEditor";
 
 export default class WhiteBoard extends Component {
 
@@ -9,10 +11,9 @@ export default class WhiteBoard extends Component {
         super(props);
         this.courseService = new CourseService();
         this.state = {
-            courses: this.courseService.constructor.findAllCourses()
+            courses: this.courseService.findAllCourses()
         }
     }
-
     addCourse = newCourse => {
         this.courseService.createCourse(newCourse)
         this.setState({
@@ -33,10 +34,11 @@ export default class WhiteBoard extends Component {
             courses: this.courseService.findAllCourses()
         })
     }
+
     render() {
         return (
             <div>
-                <h1>WhiteBoard ({this.state.courses.length})</h1>
+                {/*<h1>WhiteBoard ({this.state.courses.length})</h1>*/}
                 <Router>
                     <div>
                         <Link to="/course/table">Table</Link>
@@ -46,9 +48,18 @@ export default class WhiteBoard extends Component {
                                        addCourse={this.addCourse}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
+                        <Route
+                            exact
+                            render={(props) =>
+                                <CourseEditor
+                                    {...props}
+                                    deleteModule={this.deleteModule}
+                                    courses={this.state.courses}/>}
+                            path="/course/:courseId/edit"/>
                         <Link to="/course/grid">Grid</Link>
                         <Route path="/course/grid"
                                component={CourseGrid}/>
+
                     </div>
                 </Router>
             </div>

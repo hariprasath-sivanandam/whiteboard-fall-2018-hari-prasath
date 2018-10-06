@@ -7,56 +7,10 @@ let courses = [
                 title: 'Week 1',
                 lessons: [
                     {
-                        title: 'Lesson 1',
-                        topics: [
-                            {
-                                id: '123',
-                                title: 'topic 1',
-                                widgets: [
-                                    {
-                                        id: '123',
-                                        title: 'widget 1'
-                                    },
-                                    {
-                                        id: '234',
-                                        title: 'widget 2'
-                                    },
-                                    {
-                                        id: '345',
-                                        title: 'widget 3'
-                                    }
-                                ]
-                            },
-                            {
-                                id: '234',
-                                title: 'topic 2',
-                                widgets: [
-                                    {
-                                        title: 'widget a'
-                                    },
-                                    {
-                                        title: 'widget b'
-                                    },
-                                    {
-                                        title: 'widget c'
-                                    }
-                                ]
-                            }
-                        ]
+                        title: 'Lesson 1'
                     },
                     {
-                        title: 'Lesson 2',
-                        topics: [
-                            {
-                                title: 'topic a'
-                            },
-                            {
-                                title: 'topic b'
-                            },
-                            {
-                                title: 'topic c'
-                            }
-                        ]
+                        title: 'Lesson 2'
                     },
                     {
                         title: 'Lesson 3'
@@ -67,16 +21,13 @@ let courses = [
                 title: 'Week 2',
                 lessons: [
                     {
-                        title: 'Lesson A',
-                        topics: []
+                        title: 'Lesson A'
                     },
                     {
-                        title: 'Lesson B',
-                        topics: []
+                        title: 'Lesson B'
                     },
                     {
-                        title: 'Lesson C',
-                        topics: []
+                        title: 'Lesson C'
                     }
                 ]
             },
@@ -92,29 +43,17 @@ let courses = [
         modules: []
     }
 ]
+
 export default class CourseService {
-    static findWidgetsForTopic = forTopic => {
-        for(let c in courses) {
-            for(let m in courses[c].modules) {
-                for(let l in courses[c].modules[m].lessons) {
-                    for(let t in courses[c].modules[m].lessons[l].topics) {
-                        if(courses[c].modules[m].lessons[l].topics[t].id === forTopic.id) {
-                            return courses[c].modules[m].lessons[l].topics[t].widgets
-                        }
-                    }
-                }
-            }
-        }
-    }
-    static findAllCourses = () =>
+    findAllCourses = () =>
         courses
-    static createCourse = course =>
+    createCourse = course =>
         courses.push(course)
-    static deleteCourse = courseId =>
+    deleteCourse = courseId =>
         courses = courses.filter(
             course => course.id !== courseId
         )
-    static deleteModule = moduleToDelete => {
+    deleteModule = moduleToDelete => {
         courses = courses.map(course => {
             course.modules = course.modules.filter(
                 module => module !== moduleToDelete
@@ -122,18 +61,4 @@ export default class CourseService {
             return course;
         })
     }
-    static deleteWidget = (forTopic, forWidget) => {
-        for(let c in courses) {
-            for(let m in courses[c].modules) {
-                for(let l in courses[c].modules[m].lessons) {
-                    for(let t in courses[c].modules[m].lessons[l].topics) {
-                        if(courses[c].modules[m].lessons[l].topics[t].id === forTopic.id) {
-                            const widgetIndex = courses[c].modules[m].lessons[l].topics[t].widgets.findIndex(widget => widget.id === forWidget.id)
-                            courses[c].modules[m].lessons[l].topics[t].widgets.splice(widgetIndex, 1)
-                        }
-                    }
-                }
-            }
-        }
-    }
-} 
+}
