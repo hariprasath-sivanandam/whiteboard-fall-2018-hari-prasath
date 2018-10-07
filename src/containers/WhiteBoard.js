@@ -14,13 +14,15 @@ export default class WhiteBoard extends Component {
         this.courseService = new CourseService();
         this.state = {
             courses: this.courseService.findAllCourses(),
-            isTableView: true
+            isTableView: true,
+            newCourse:""
         }
     }
     toggleView = () =>{
         this.setState({isTableView: !this.state.isTableView})
     }
     addCourse = newCourse => {
+        newCourse = {id:"XXX", title: newCourse, modules:[]}
         this.courseService.createCourse(newCourse)
         this.setState({
             courses: this.courseService.findAllCourses()
@@ -41,6 +43,19 @@ export default class WhiteBoard extends Component {
         })
     }
 
+    addNewCourse =() => {
+        if (this.state.newCourse.length > 0)
+            this.addCourse(this.state.newCourse)
+        else{
+            alert("Please add new course title")
+        }
+    }
+
+
+    setNewCourse = event =>{
+        this.setState({newCourse: event.target.value})
+    }
+
     render() {
         return (
             <div>
@@ -53,10 +68,11 @@ export default class WhiteBoard extends Component {
                             Course Manager
                         </div>
                         <div className="col-lg-6">
-                            <input className="form-control mr-sm-2" type="search" placeholder="New Course Title" aria-label="Search"/>
+                            <input className="form-control mr-sm-2" onChange={this.setNewCourse} value={this.state.newCourse}
+                                   type="search" placeholder="New Course Title" aria-label="Search"/>
                         </div>
                         <div className="col-lg-2">
-                            <button className="btn  rounded-circle btn-outline-secondary" onClick={this.addWidgetToServer}>
+                            <button className="btn  rounded-circle btn-outline-secondary" onClick={this.addNewCourse}>
                                 <i className="fa fa-plus-circle"></i>
                             </button>
                         </div>
@@ -95,7 +111,6 @@ export default class WhiteBoard extends Component {
                         </div>
                 }
                 </Router>
-                {/*<Router>*/}
                     <div>
 
                         {this.state.isTableView && <div>
