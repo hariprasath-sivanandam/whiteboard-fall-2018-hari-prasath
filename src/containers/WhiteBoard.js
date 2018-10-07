@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom'
 import CourseService from "../services/CourseService";
 import CourseEditor from "./CourseEditor";
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -58,6 +58,7 @@ export default class WhiteBoard extends Component {
 
     render() {
         return (
+            <Router>
             <div>
                 <nav className="navbar navbar-light bg-light justify-content-center">
                     <div className="container row">
@@ -78,8 +79,6 @@ export default class WhiteBoard extends Component {
                         </div>
 
                     </div>
-                    {/*<a className="navbar-brand">Navbar</a>*/}
-
                 </nav>
                 <div className="row flex-row-reverse pr-2 pb-3 align-items-center">
                     <span style={{float: "left"}} className="px-2">
@@ -100,48 +99,29 @@ export default class WhiteBoard extends Component {
                         </span>
 
                 </div>
-                <Router>
-                {
-                    !!this.state.isTableView?
-                        <div>
-                            <CourseTable addCourse={this.addCourse} deleteCourse={this.deleteCourse} courses={this.state.courses}/>
-                        </div> :
-                        <div>
-                            <CourseGrid/>
-                        </div>
-                }
-                </Router>
                     <div>
-
-                        {this.state.isTableView && <div>
-
-                            {/*<Link to="/course/table">Table</Link>*/}
-                            {/*<Route path="/course/table"*/}
-                                   {/*render={() =>*/}
-                                       {/*<CourseTable*/}
-                                           {/*addCourse={this.addCourse}*/}
-                                           {/*deleteCourse={this.deleteCourse}*/}
-                                           {/*courses={this.state.courses}/>}/>*/}
-                        </div>
-                        }
-                        {!this.state.isTableView && <div>
-                            {/*<Link to="/course/grid">Grid</Link>*/}
-                            {/*< Route path="/course/grid"*/}
-                                    {/*component={CourseGrid}/>*/}
-                            {/*<Route*/}
-                                {/*exact*/}
-                                {/*render={(props) =>*/}
-                                    {/*<CourseEditor*/}
-                                        {/*{...props}*/}
-                                        {/*deleteModule={this.deleteModule}*/}
-                                        {/*courses={this.state.courses}/>}*/}
-                                {/*path="/course/:courseId/edit"/>*/}
-                        </div>
-                        }
-
+                    {
+                        !!this.state.isTableView?
+                            <div>
+                                <CourseTable addCourse={this.addCourse} deleteCourse={this.deleteCourse} courses={this.state.courses}/>
+                            </div> :
+                            <div>
+                                <CourseGrid/>
+                            </div>
+                    }
+                    <Switch>
+                        <Route
+                            exact
+                            render={(props) =>
+                                <CourseEditor
+                                    {...props}
+                                    deleteModule={this.deleteModule}
+                                    courses={this.state.courses}/>}
+                            path="/course/:courseId/edit"/>
+                    </Switch>
                     </div>
-                 {/*</Router>*/}
             </div>
+            </Router>
         );
     }
 }

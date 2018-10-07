@@ -61,10 +61,11 @@
       <file leaf-file-name="WhiteBoard.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/WhiteBoard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="113" selection-start-line="113" selection-end-line="113" />
+            <state relative-caret-position="514">
+              <caret line="121" column="26" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#3265#3433#0" />
               </folding>
             </state>
           </provider>
@@ -127,6 +128,7 @@
       <find>link</find>
       <find>Li</find>
       <find>Link</find>
+      <find>class</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,10 +156,10 @@
         <option value="$PROJECT_DIR$/src/components/TopicPill.js" />
         <option value="$PROJECT_DIR$/src/components/WidgetList.js" />
         <option value="$PROJECT_DIR$/src/components/ModuleListItem.js" />
-        <option value="$PROJECT_DIR$/src/components/courseRow.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/styles/WhiteBoard.css" />
         <option value="$PROJECT_DIR$/src/containers/CourseTable.js" />
+        <option value="$PROJECT_DIR$/src/components/courseRow.js" />
         <option value="$PROJECT_DIR$/src/containers/WhiteBoard.js" />
       </list>
     </option>
@@ -362,7 +364,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39606000" />
+    <option name="totallyTimeSpent" value="41142000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -478,6 +480,7 @@
           <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#3265#3433#0" />
           </folding>
         </state>
       </provider>
@@ -604,6 +607,7 @@
           <caret line="35" column="46" lean-forward="true" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#3265#3433#0" />
           </folding>
         </state>
       </provider>
@@ -710,16 +714,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/courseAdd.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/courseRow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/LessonTab.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -761,12 +755,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/courseRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/WhiteBoard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="514">
+          <caret line="121" column="26" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#3265#3433#0" />
           </folding>
         </state>
       </provider>
