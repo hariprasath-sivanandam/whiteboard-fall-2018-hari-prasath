@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ModuleList from '../components/ModuleList'
+import CourseService from "../services/CourseService";
 export default class CourseEditor extends Component {
     constructor(props) {
         super(props);
@@ -11,14 +12,14 @@ export default class CourseEditor extends Component {
 
         const courseId = this.props.match.params.courseId;
         // courses array passed in as a property
-        const course = this.props.courses.find(
-            course => course.id === courseId);
+        this.courseService = new CourseService();
         this.state = {
-            course: course
+            course:this.courseService.findCourseById(courseId)
         }
     }
 
-    render() {
+    render()
+        {
         return (
             <div>
                 <h2>Course Editor:

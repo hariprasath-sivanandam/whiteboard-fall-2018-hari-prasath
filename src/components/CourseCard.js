@@ -5,8 +5,6 @@ export default class CourseCard extends React.Component
 {
     constructor(props) {
         super(props);
-        console.log("card here")
-        console.log(props)
     }
 
     render() {

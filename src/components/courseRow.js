@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const CourseRow = ({course, deleteCourse}) =>
     <tr>
-        <td><center>{course.title} {course.id}</center></td>
+        <td><center><Link to={`/course/${course.id}/edit`}>{course.title} {course.id}</Link></center></td>
         <td><center>me</center></td>
         <td><center>6:45</center></td>
         <td><center>

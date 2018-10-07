@@ -53,6 +53,9 @@ export default class CourseService {
         courses = courses.filter(
             course => course.id !== courseId
         )
+    findCourseById(id){
+        return courses.find(course => course.id === id)
+    }
     deleteModule = moduleToDelete => {
         courses = courses.map(course => {
             course.modules = course.modules.filter(
