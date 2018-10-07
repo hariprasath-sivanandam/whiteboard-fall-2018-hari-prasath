@@ -10,7 +10,7 @@ const CourseRow = ({course, deleteCourse}) =>
         <td><center>
             <Link
                 className="btn btn-primary" to={`/course/${course.id}/edit`}>Edit</Link>
-            <button onClick={() => deleteCourse(course)} className="btn btn-danger">Delete</button>
+            <button onClick={() => deleteCourse(course)} className="btn btn-danger">X</button>
         </center></td>
     </tr>
 
