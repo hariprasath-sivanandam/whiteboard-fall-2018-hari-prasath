@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 
-const CourseRow = ({course, deleteCourse}) =>
+const CourseRow = ({course_id, course, deleteCourse}) =>
     <tr>
         <td><center><Link to={`/course/${course.id}/edit`}>{course.title} {course.id}</Link></center></td>
         <td><center>me</center></td>

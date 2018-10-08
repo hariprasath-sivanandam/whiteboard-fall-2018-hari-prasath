@@ -8,7 +8,7 @@ const ModuleListItem = ({module, deleteModule, selectModule, selected,temp}) =>
             Edit
         </button>
         <button
-            onClick={() => deleteModule(module)}>
+            onClick={() => deleteModule(module.id)}>
             Delete
         </button>
     </li>

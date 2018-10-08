@@ -47,13 +47,15 @@ class CourseGrid extends React.Component {
     componentDidMount() { // this method is called after constructor gets executed
         this.findAllCourses();
     }
-    renderCourseRows() {
+    renderCourseRows(deleteCourseFunction) {
         let courses = null;
         if(this.state) {
-            courses = this.state.courses.map(function(course) {
+            courses = this.props.courses.map(function(course) {
                 return <CourseCard key={course.id}
-                                  course={course}
-                                  deleteCourseHandler={self.deleteCourse}/>
+                                   course={course}
+                                  deleteCourseHandler={self.deleteCourse}
+                                   deleteCourse = {deleteCourseFunction}
+                />
             });
         }
         return (
@@ -63,18 +65,13 @@ class CourseGrid extends React.Component {
     findAllCourses() {
         let courses = this.courseService.findAllCourses();
         this.setState({courses: courses})
-        // this.courseService
-        //     .findAllCourses()
-        //     .then((courses) => {
-        //         this.setState({courses: courses});
-        //     });
     }
     render() {
         return (
             <div className="container-fluid">
                 <h1>Whiteboard</h1>
                 <div className="card-deck">
-                    {this.renderCourseRows()}
+                    {this.renderCourseRows(this.props.deleteCourse)}
                 </div>
             </div>
         )

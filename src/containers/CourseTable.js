@@ -10,7 +10,6 @@ class CourseTable extends React.Component {
     constructor() {
         super();
         this.courseService = new CourseService();
-        this.state = {courses: []};
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
@@ -46,13 +45,15 @@ class CourseTable extends React.Component {
     componentDidMount() { // this method is called after constructor gets executed
         this.findAllCourses();
     }
-    renderCourseRows() {
+    renderCourseRows(deleteCourseFunction) {
         let courses = null;
         if(this.state) {
-            courses = this.state.courses.map(function(course) {
+            courses = this.props.courses.map(function(course) {
                 return <CourseRow key={course.id}
                                   course={course}
-                                  deleteCourseHandler={self.deleteCourse}/>
+                                  deleteCourseHandler={self.deleteCourse}
+                                  deleteCourse={deleteCourseFunction}
+                />
             });
         }
         return (
@@ -81,7 +82,7 @@ class CourseTable extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.renderCourseRows()}
+                    {this.renderCourseRows(this.props.deleteCourse)}
                     </tbody>
                 </table>
             </div>

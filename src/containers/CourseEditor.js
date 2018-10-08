@@ -14,9 +14,72 @@ export default class CourseEditor extends Component {
         // courses array passed in as a property
         this.courseService = new CourseService();
         this.state = {
-            course:this.courseService.findCourseById(courseId)
+            course:this.courseService.findCourseById(courseId),
+            selectedModule: null
         }
+
     }
+
+
+    addNewModule=(courseId, newModule)=>{
+
+        const  courseService = new CourseService();
+
+        courseService.addModuleByCourseId(courseId, newModule)
+
+        this.setState({
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+
+        })
+
+        ;
+
+
+    }
+
+
+    handleDeleteModule=(moduleId)=>{
+
+        const  courseService = new CourseService();
+        const newCourseState = courseService.deleteModuleById(this.state.course.id, moduleId)
+
+
+        console.log(newCourseState)
+
+        if (!!newCourseState){
+            this.setState({
+                course : newCourseState
+            })
+        }
+
+
+    }
+
+
+    selectModule =(module)=>{
+
+        this.setState({
+            selectedModule : module
+        })
+
+    }
+
+    editModule =(moduleId)=>{
+        this.selectModule(module)
+
+
+
+
+
+
+    }
+
+
+
+
+
+
 
     render()
         {
@@ -30,10 +93,13 @@ export default class CourseEditor extends Component {
                 <div className="row">
                     <div className="col-4">
                         <ModuleList
-                        selectModule={this.selectModule}
-                        selectedModule={this.state.selectedModule}
-                        deleteModule={this.props.deleteModule}
-                        modules={this.state.course.modules}/>
+                            selectModule={this.selectModule}
+                            selectedModule={this.state.selectedModule}
+                            deleteModule={this.handleDeleteModule}
+                            modules={this.state.course.modules}
+                            addNewModule ={this.addNewModule}
+                            courseId ={this.state.course.id}
+                        />
                     </div>
                     {/*<div className="col-8">*/}
                         {/*<LessonTabs*/}

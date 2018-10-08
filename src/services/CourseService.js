@@ -5,6 +5,7 @@ let courses = [
         modules: [
             {
                 title: 'Week 1',
+                id : 1234,
                 lessons: [
                     {
                         title: 'Lesson 1'
@@ -19,6 +20,7 @@ let courses = [
             },
             {
                 title: 'Week 2',
+                id:'1245',
                 lessons: [
                     {
                         title: 'Lesson A'
@@ -33,6 +35,7 @@ let courses = [
             },
             {
                 title: 'Week 3',
+                id: 123467,
                 lessons: []
             }
         ]
@@ -50,7 +53,7 @@ export default class CourseService {
     createCourse = course =>
         courses.push(course)
     deleteCourse = courseId =>
-        courses = courses.filter(
+         courses.filter(
             course => course.id !== courseId
         )
     findCourseById(id){
@@ -63,5 +66,58 @@ export default class CourseService {
             )
             return course;
         })
+    }
+
+
+    addModuleByCourseId=(courseId, newModule)=>{
+
+        console.log(courseId)
+        console.log(newModule)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                currentModules.push(newModule)
+                courses[i].modules =currentModules
+                return courses;
+            }
+        }
+        return null;
+    }
+
+
+    deleteModuleById=(courseId, moduleId)=>{
+
+        console.log(courseId)
+        console.log(moduleId)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                courses[i].modules = currentModules.filter((module)=>{
+                    return module.id !== moduleId
+
+                })
+                return  courses[i];
+            }
+        }
+        return null;
+    }
+
+    updateModule=(courseId, module)=>{
+        console.log(courseId)
+        console.log(module)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                courses[i].modules[module.id] =  module
+                return  courses[i];
+            }
+        }
+        return null;
     }
 }

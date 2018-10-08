@@ -1,18 +1,40 @@
 import React from 'react'
 import ModuleListItem from "./ModuleListItem";
+import AddModuleText from "./AddModuleText";
+class ModuleList extends React.Component{
+    constructor(props){
+        super(props)
+    }
 
-const ModuleList = ({modules, deleteModule, selectModule, selectedModule}) =>
-    <ul className="list-group">
-        {
-            modules.map((module, index) =>
-                <ModuleListItem
-                    selected={selectedModule === module}
-                    selectModule={selectModule}
-                    deleteModule={deleteModule}
-                    key={index}
-                    module={module}/>
-            )
-        }
-    </ul>
+
+
+    render = () =>{
+
+        return  <ul className="list-group">
+
+                <AddModuleText courseId={this.props.courseId}
+                               addNewModule = {this.props.addNewModule}
+                />
+            {
+                this.props.modules.map((module, index) =>
+                    <ModuleListItem
+                        selected={this.props.selectedModule === module}
+                        selectModule={this.props.selectModule}
+                        deleteModule={this.props.deleteModule}
+
+                        key={index}
+                        module={module}/>
+                )
+            }
+        </ul>
+    }
+
+
+
+
+}
+
+
+
 
 export default ModuleList

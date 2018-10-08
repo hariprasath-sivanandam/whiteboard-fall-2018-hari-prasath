@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import CourseTable from "../containers/CourseTable";
 import CourseGrid from "../containers/CourseGrid";
-import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom'
 import CourseService from "../services/CourseService";
-import CourseEditor from "../containers/CourseEditor";
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../styles/WhiteBoard.css'
 
@@ -30,9 +28,11 @@ export default class courseScreen extends Component {
     }
 
     deleteCourse = courseToDelete => {
-        this.courseService.deleteCourse(courseToDelete.id)
+        console.log("delete")
+        alert(JSON.stringify(courseToDelete))
+        console.log(this.courseService.deleteCourse(courseToDelete.id))
         this.setState({
-            courses: this.courseService.findAllCourses()
+            courses: this.courseService.deleteCourse(courseToDelete.id)
         })
     }
 
