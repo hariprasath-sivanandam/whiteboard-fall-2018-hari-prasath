@@ -1,6 +1,7 @@
 import React from 'react'
 import ModuleListItem from "./ModuleListItem";
 import AddModuleText from "./AddModuleText";
+import EditableModuleListItem from "./EditableModuleListItem";
 class ModuleList extends React.Component{
     constructor(props){
         super(props)
@@ -17,13 +18,19 @@ class ModuleList extends React.Component{
                 />
             {
                 this.props.modules.map((module, index) =>
-                    <ModuleListItem
-                        selected={this.props.selectedModule === module}
-                        selectModule={this.props.selectModule}
-                        deleteModule={this.props.deleteModule}
+                    <div>
+                        <EditableModuleListItem
+                            selected={this.props.selectedModule === module}
+                            selectModule={this.props.selectModule}
+                            deleteModule={this.props.deleteModule}
+                            updateModule={this.props.updateModule}
+                            courseId={1234}
+                            updateModuleTitle ={this.props.updateModuleTitle}
 
-                        key={index}
-                        module={module}/>
+                            key={index}
+                            module={module}/>
+                    </div>
+
                 )
             }
         </ul>

@@ -18,6 +18,7 @@ export default class CourseEditor extends Component {
             selectedModule: null
         }
 
+
     }
 
 
@@ -32,10 +33,6 @@ export default class CourseEditor extends Component {
             // course : courseService.addModuleByCourseId(courseId, newModule)
 
         })
-
-        ;
-
-
     }
 
 
@@ -57,16 +54,32 @@ export default class CourseEditor extends Component {
     }
 
 
-    selectModule =(module)=>{
+    selectModule =(module,cb)=>{
 
         this.setState({
             selectedModule : module
+        }, ()=>{
         })
 
     }
 
-    editModule =(moduleId)=>{
-        this.selectModule(module)
+    editModule =(module)=>{
+        this.setState({
+            selectedModule : module
+        }, ()=>{
+
+            console.log(this.state.course.id)
+            console.log(module)
+
+
+
+
+        })
+
+
+
+
+
 
 
 
@@ -76,6 +89,28 @@ export default class CourseEditor extends Component {
     }
 
 
+    updateModuleTitle=(newText)=>{
+
+
+        const newModule = {...this.state.selectedModule, title : newText}
+
+        this.setState({
+            course :  this.courseService.updateModule(this.state.course.id, newModule)
+        })
+        console.log("8888")
+        // this.courseService.findCourseById(this.state.course.id)
+
+        // const courseService = new CourseService();
+
+
+        // const newCourseState = courseService.updateModule(this.state.course.id, newModule);
+        // console.log(newCourseState)
+        // this.setState({
+        //     course: newCourseState,
+        //     selectedModule : null
+        // })
+
+    }
 
 
 
@@ -99,7 +134,11 @@ export default class CourseEditor extends Component {
                             modules={this.state.course.modules}
                             addNewModule ={this.addNewModule}
                             courseId ={this.state.course.id}
-                        />
+
+                            updateModuleTitle={this.updateModuleTitle}
+                            updateModule ={this.editModule}
+
+                    />
                     </div>
                     {/*<div className="col-8">*/}
                         {/*<LessonTabs*/}

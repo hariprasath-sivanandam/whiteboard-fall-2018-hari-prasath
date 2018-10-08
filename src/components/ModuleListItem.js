@@ -1,10 +1,15 @@
 import React from 'react'
 
-const ModuleListItem = ({module, deleteModule, selectModule, selected,temp}) =>
+
+
+
+
+
+const ModuleListItem = ({module, deleteModule, selectModule, selected,updateModule}) =>
     <li className={selected ? 'list-group-item active': 'list-group-item'}>
         {module.title}
         <button
-            onClick={() => selectModule(module)}>
+            onClick={() => updateModule(module)}>
             Edit
         </button>
         <button
