@@ -3,6 +3,7 @@ import ModuleList from '../components/ModuleList'
 import CourseService from "../services/CourseService";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
+import WidgetList from "../components/WidgetList";
 
 export default class CourseEditor extends Component {
     constructor(props) {
@@ -39,7 +40,6 @@ export default class CourseEditor extends Component {
 
         })
     }
-
 
     handleDeleteModule=(moduleId)=>{
 
@@ -89,7 +89,6 @@ export default class CourseEditor extends Component {
         })
     }
 
-
     updateModuleTitle=(newText)=>{
 
 
@@ -98,22 +97,7 @@ export default class CourseEditor extends Component {
         this.setState({
             course :  this.courseService.updateModule(this.state.course.id, newModule)
         })
-        // this.courseService.findCourseById(this.state.course.id)
-
-        // const courseService = new CourseService();
-
-
-        // const newCourseState = courseService.updateModule(this.state.course.id, newModule);
-        // console.log(newCourseState)
-        // this.setState({
-        //     course: newCourseState,
-        //     moduleToEdit : null
-        // })
     }
-
-
-
-
 
     render()
         {
@@ -136,9 +120,7 @@ export default class CourseEditor extends Component {
                             updateModuleTitle={this.updateModuleTitle}
                             updateModule ={this.editModule}
                             selectModule = {this.selectModule}
-                            selectedModule = {this.state.selectedModule}
-
-                    />
+                            selectedModule = {this.state.selectedModule}/>
                     </div>
                     <div className="col-8">
                         { !! this.state.selectedModule && <LessonTabs lessons={this.state.selectedModule.lessons}
@@ -146,7 +128,7 @@ export default class CourseEditor extends Component {
 
                         { !! this.state.selectedLesson && <TopicPills topics={this.state.selectedLesson.topics}
                                                                       selectTopic={this.selectTopic} selectedTopic={this.state.selectedTopic}/>}
-                        
+                        { !! this.state.selectedTopic && <WidgetList/>}
                         <div className="jumbotron jumbotron-fluid">
                             <div className="container">
                                 <h1 className="display-4">Fluid jumbotron</h1>
@@ -156,12 +138,6 @@ export default class CourseEditor extends Component {
                             </div>
                         </div>
                     </div>
-                    {/*<div className="col-8">*/}
-                        {/*<LessonTabs*/}
-                            {/*selectLesson={this.selectLesson}*/}
-                            {/*selectedLesson={this.state.selectedLesson}*/}
-                            {/*lessons={this.state.moduleToEdit.lessons}/>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         )
