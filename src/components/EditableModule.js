@@ -26,8 +26,6 @@ export default  class EditableModule extends React.Component{
         })
     }
 
-
-
     updateCurrentState=(e)=>{
         console.log(e.target.value)
         this.setState({

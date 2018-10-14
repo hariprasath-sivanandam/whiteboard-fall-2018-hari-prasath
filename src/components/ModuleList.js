@@ -7,8 +7,6 @@ class ModuleList extends React.Component{
         super(props)
     }
 
-
-
     render = () =>{
 
         return  <ul className="list-group">
@@ -20,13 +18,14 @@ class ModuleList extends React.Component{
                 this.props.modules.map((module, index) =>
                     <div>
                         <EditableModuleListItem
-                            selected={this.props.selectedModule === module}
-                            selectModule={this.props.selectModule}
+                            selected={this.props.moduleToEdit === module}
+                            selectModuleToEdit={this.props.selectModuleToEdit}
                             deleteModule={this.props.deleteModule}
                             updateModule={this.props.updateModule}
                             courseId={1234}
                             updateModuleTitle ={this.props.updateModuleTitle}
-
+                            selectModule = {this.props.selectModule}
+                            selectedModule = {this.props.selectedModule}
                             key={index}
                             module={module}/>
                     </div>

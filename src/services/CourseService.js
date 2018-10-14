@@ -8,13 +8,25 @@ let courses = [
                 id : 1234,
                 lessons: [
                     {
-                        title: 'Lesson 1'
+                        title: 'Lesson 1',
+                        topics:[{
+                            title: "topic 1"
+                        }, {
+                           title: "topic 2"
+                            },
+                            {
+                            title: "topic 3"
+                            }
+
+                        ]
                     },
                     {
-                        title: 'Lesson 2'
+                        title: 'Lesson 2',
+                        topics:[]
                     },
                     {
-                        title: 'Lesson 3'
+                        title: 'Lesson 3',
+                        topics:[]
                     }
                 ]
             },
@@ -23,13 +35,16 @@ let courses = [
                 id:1245,
                 lessons: [
                     {
-                        title: 'Lesson A'
+                        title: 'Lesson A',
+                        topics:[]
                     },
                     {
-                        title: 'Lesson B'
+                        title: 'Lesson B',
+                        topics:[]
                     },
                     {
-                        title: 'Lesson C'
+                        title: 'Lesson C',
+                        topics:[]
                     }
                 ]
             },

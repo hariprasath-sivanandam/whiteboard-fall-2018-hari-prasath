@@ -20,9 +20,11 @@ class EditableModuleListItem extends React.Component{
                     <ModuleListItem
                     module={this.props.module}
                     deleteModule={this.props.deleteModule}
-                    selectModule={this.props.selectModule}
+                    selectModuleToEdit={this.props.selectModuleToEdit}
+                    selectModule = {this.props.selectModule}
                     updateModule = {this.props.updateModule}
                     selected ={this.props.selected}
+                    selectedModule = {this.props.selectedModule}
                     />
 
             }
