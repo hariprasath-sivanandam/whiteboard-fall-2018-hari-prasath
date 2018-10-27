@@ -158,12 +158,23 @@ export default class CourseService {
     }
 
     deleteLessonById=(courseId, moduleId, lessonId)=>{
-        let selectedCourse = courses.find(course => course.id === courseId)
-        let selectedModules = selectedCourse.modules.find(module => module.id === moduleId)
-        let selectedLessons = selectedModules.lessons.filter((lesson) =>{return lesson.id !== lessonId})
-        selectedModules.lessons = selectedLessons
-        selectedCourse.modules = selectedModules
-        return selectedCourse;
+        let newLessons = courses.find(course => course.id === courseId).
+        modules.find(module=> module.id === moduleId).lessons.filter(lesson => {return lesson.id !== lessonId})
+        console.log(newLessons)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                for (let j = 0; j < currentModules.length; j++)
+                {
+                    if (currentModules[j].id===moduleId) {
+                        currentModules[j].lessons = newLessons
+                        return currentModules[j];
+                    }
+                }
+            }
+        }
     }
 
     deleteModuleById=(courseId, moduleId)=>{

@@ -82,16 +82,22 @@ export default class CourseEditor extends Component {
     handleDeleteLesson=(lessonId)=>{
 
         const  courseService = new CourseService();
-        const newCourseState = courseService.deleteLessonById(this.state.course.id, this.state.selectedModule.id, lessonId)
+        const newSelectedModule = courseService.deleteLessonById(this.state.course.id, this.state.selectedModule.id, lessonId)
         console.log("#####")
-        console.log(newCourseState.modules)
+        console.log(this.state.course.modules)
+        console.log(this.state.selectedModule.lessons)
+        //console.log(newCourseState.modules.find(this.state.selectedModule.id))
         console.log("####")
-        if (!!newCourseState){
+        if(!! newSelectedModule){
             this.setState({
-                selectedModules : newCourseState.modules
-
+                selectedModule: newSelectedModule
             })
         }
+        // if (!!newCourseState){
+        //     this.setState({
+        //         selectedModule : newCourseState.modules
+        //     })
+        // }
     }
 
     // handleDeleteTopic=(moduleId, lessonId, topicId)=>{
