@@ -177,8 +177,6 @@ export default class LessonList extends React.Component{
 
 
     render=()=>{
-
-
         let lessons = this.returnListOfLessons()
         return  <ul className="nav nav-tabs px-2">
             <li className="nav-item nav-link">

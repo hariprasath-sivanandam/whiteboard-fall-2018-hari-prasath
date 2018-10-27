@@ -9,6 +9,7 @@ let courses = [
                 lessons: [
                     {
                         title: 'Lesson 1',
+                        id: 1234,
                         topics:[{
                             title: "topic 1"
                         }, {
@@ -22,10 +23,12 @@ let courses = [
                     },
                     {
                         title: 'Lesson 2',
+                        id: 2345,
                         topics:[]
                     },
                     {
                         title: 'Lesson 3',
+                        id: 3456,
                         topics:[]
                     }
                 ]
@@ -36,14 +39,17 @@ let courses = [
                 lessons: [
                     {
                         title: 'Lesson A',
+                        id: 4567,
                         topics:[]
                     },
                     {
                         title: 'Lesson B',
+                        id: 5678,
                         topics:[]
                     },
                     {
                         title: 'Lesson C',
+                        id: 6789,
                         topics:[]
                     }
                 ]
@@ -86,6 +92,53 @@ export default class CourseService {
         })
     }
 
+    addTopicByLessonId = (courseId, moduleId, lessonId, newTopic) =>{
+
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                for (let j=0; j < currentModules.length; j++){
+                    if (currentModules[j].id == moduleId){
+                        let currentLessons = currentModules[j].lessons
+                        for (let k=0; k < currentLessons.length; k++) {
+                            if (currentLessons[k].id == lessonId) {
+                                let currentTopics = currentLessons[k].topics
+                                currentTopics.push(newTopic)
+                                currentLessons[k].topics = currentTopics
+                            }
+                        }
+                        currentModules.lessons = currentLessons
+                    }
+                }
+                courses[i].modules =currentModules
+                return courses;
+            }
+        }
+        return null;
+    }
+
+    addLesssonByModuleId = (courseId, moduleId, newLesson)=> {
+        console.log(courseId, moduleId)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                for (let j=0; j < currentModules.length; j++){
+                    if (currentModules[j].id == moduleId){
+                        let currentLessons = currentModules[j].lessons
+                        currentLessons.push(newLesson)
+                        currentModules[j].lessons = currentLessons
+                    }
+                }
+                courses[i].modules =currentModules
+                return courses;
+            }
+        }
+        return null;
+    }
 
     addModuleByCourseId=(courseId, newModule)=>{
 
@@ -104,6 +157,14 @@ export default class CourseService {
         return null;
     }
 
+    deleteLessonById=(courseId, moduleId, lessonId)=>{
+        let selectedCourse = courses.find(course => course.id === courseId)
+        let selectedModules = selectedCourse.modules.find(module => module.id === moduleId)
+        let selectedLessons = selectedModules.lessons.filter((lesson) =>{return lesson.id !== lessonId})
+        selectedModules.lessons = selectedLessons
+        selectedCourse.modules = selectedModules
+        return selectedCourse;
+    }
 
     deleteModuleById=(courseId, moduleId)=>{
 

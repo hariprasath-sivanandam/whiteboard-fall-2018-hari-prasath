@@ -11,8 +11,6 @@ export default  class AddModuleText extends React.Component{
 
     }
 
-
-
     handleAddNewModule = (courseId)=>{
 
         const id = Math.floor(Math.random() * 10000000)
@@ -22,10 +20,7 @@ export default  class AddModuleText extends React.Component{
             lessons:[]
         }
         this.props.addNewModule(courseId, newModule)
-
     }
-
-
 
     updateCurrentState=(e)=>{
         this.setState({
@@ -33,6 +28,7 @@ export default  class AddModuleText extends React.Component{
 
         })
     }
+
     render(){
         return <div>
             <li  className= "list-group-item" >

@@ -23,9 +23,19 @@ export default class CourseEditor extends Component {
             selectedModule: null,
             lessonToEdit: null,
             selectedLesson: null,
-            selectTopic: null,
             selectedTopic: null
         }
+    }
+
+    addNewTopic=(courseId, moduleId, lessonId, newTopic)=>{
+        const  courseService = new CourseService();
+        courseService.addTopicByLessonId(courseId, moduleId, lessonId, newTopic)
+
+        this.setState({
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+
+        })
     }
 
     addNewModule=(courseId, newModule)=>{
@@ -41,20 +51,60 @@ export default class CourseEditor extends Component {
         })
     }
 
+    addNewLesson=(courseId, moduleId, newLesson)=>{
+
+        const  courseService = new CourseService();
+
+        courseService.addLesssonByModuleId(courseId, moduleId, newLesson)
+
+        this.setState({
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+            // course : courseService.addModuleByCourseId(courseId, newModule)
+
+        })
+    }
+
     handleDeleteModule=(moduleId)=>{
 
         const  courseService = new CourseService();
         const newCourseState = courseService.deleteModuleById(this.state.course.id, moduleId)
 
 
-        console.log(newCourseState)
+
 
         if (!!newCourseState){
             this.setState({
-                course : newCourseState
+                selectedModules : newCourseState.modules
             })
         }
     }
+
+    handleDeleteLesson=(lessonId)=>{
+
+        const  courseService = new CourseService();
+        const newCourseState = courseService.deleteLessonById(this.state.course.id, this.state.selectedModule.id, lessonId)
+        console.log("#####")
+        console.log(newCourseState.modules)
+        console.log("####")
+        if (!!newCourseState){
+            this.setState({
+                selectedModules : newCourseState.modules
+
+            })
+        }
+    }
+
+    // handleDeleteTopic=(moduleId, lessonId, topicId)=>{
+    //
+    //     const courseService = new CourseService();
+    //     const newCourseState = courseService.deleteModuleById(this.state.course.id, moduleId, lessonId, topicId)
+    //
+    //     if (!!newCourseState){
+    //         this.setState({
+    //             course : newCourseState
+    //         })
+    //     }
+    // }
 
     selectModule =(module,cb)=>{
         this.setState({
@@ -123,18 +173,30 @@ export default class CourseEditor extends Component {
                             selectedModule = {this.state.selectedModule}/>
                     </div>
                     <div className="col-8">
+
                         { !! this.state.selectedModule && <LessonTabs lessons={this.state.selectedModule.lessons}
-                                                                      selectLesson={this.selectLesson} selectedLesson={this.state.selectedLesson} />}
+                                                                      selectLesson={this.selectLesson}
+                                                                      selectedLesson={this.state.selectedLesson}
+                                                                      courseId ={this.state.course.id}
+                                                                      moduleId = {this.state.selectedModule.id}
+                                                                      addNewLesson={this.addNewLesson}
+                                                                      deleteLesson = {this.handleDeleteLesson}
+                        />}
 
                         { !! this.state.selectedLesson && <TopicPills topics={this.state.selectedLesson.topics}
-                                                                      selectTopic={this.selectTopic} selectedTopic={this.state.selectedTopic}/>}
+                                                                      selectTopic={this.selectTopic}
+                                                                      selectedTopic={this.state.selectedTopic}
+                                                                      courseId = {this.state.course.id}
+                                                                      moduleId = {this.state.selectedModule.id}
+                                                                      lessonId = {this.state.selectedLesson.id}
+                                                                      addNewTopic = {this.addNewTopic}
+                        />}
                         { !! this.state.selectedTopic && <WidgetList/>}
                         <div className="jumbotron jumbotron-fluid">
                             <div className="container">
                                 <h1 className="display-4">Fluid jumbotron</h1>
                                 <p className="lead">This is a modified jumbotron that occupies the entire horizontal
                                     space of its parent.</p>
-
                             </div>
                         </div>
                     </div>
