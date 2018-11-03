@@ -5,14 +5,10 @@ class  EditableLessonListItem extends React.Component{
     constructor(props)
     {
         super(props);
-        console.log("Printing all  state ");
-
-        console.log(this.props);
         this.state ={
             title : ""
         }
         this.titleChanged = this.titleChanged.bind(this);
-
     }
 
     titleChanged=(event)=>{
@@ -25,8 +21,6 @@ class  EditableLessonListItem extends React.Component{
 
     handleEdit=()=>
     {
-        console.log("handling update title & edit");
-        console.log(this.props);
         this.props.editLesson(this.props.index, this.state.title,"date");
         this.props.toggleEditMode();
 

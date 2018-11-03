@@ -27,14 +27,11 @@ export default class CourseEditor extends Component {
         }
     }
 
-    addNewTopic=(courseId, moduleId, lessonId, newTopic)=>{
+    addNewTopic=(courseId, moduleId, newTopic)=>{
         const  courseService = new CourseService();
-        courseService.addTopicByLessonId(courseId, moduleId, lessonId, newTopic)
+        courseService.addTopicByLessonId(courseId, moduleId, this.state.selectedLesson.id, newTopic)
 
         this.setState({
-            // course : courseService.addModuleByCourseId(courseId, newModule)
-            // course : courseService.addModuleByCourseId(courseId, newModule)
-
         })
     }
 
@@ -45,8 +42,6 @@ export default class CourseEditor extends Component {
         courseService.addModuleByCourseId(courseId, newModule)
 
         this.setState({
-            // course : courseService.addModuleByCourseId(courseId, newModule)
-            // course : courseService.addModuleByCourseId(courseId, newModule)
 
         })
     }
@@ -58,20 +53,12 @@ export default class CourseEditor extends Component {
         courseService.addLesssonByModuleId(courseId, moduleId, newLesson)
 
         this.setState({
-            // course : courseService.addModuleByCourseId(courseId, newModule)
-            // course : courseService.addModuleByCourseId(courseId, newModule)
-
         })
     }
 
     handleDeleteModule=(moduleId)=>{
-
         const  courseService = new CourseService();
         const newCourseState = courseService.deleteModuleById(this.state.course.id, moduleId)
-
-
-
-
         if (!!newCourseState){
             this.setState({
                 selectedModules : newCourseState.modules
@@ -80,37 +67,24 @@ export default class CourseEditor extends Component {
     }
 
     handleDeleteLesson=(lessonId)=>{
-
         const  courseService = new CourseService();
         const newSelectedModule = courseService.deleteLessonById(this.state.course.id, this.state.selectedModule.id, lessonId)
-        console.log("#####")
-        console.log(this.state.course.modules)
-        console.log(this.state.selectedModule.lessons)
-        //console.log(newCourseState.modules.find(this.state.selectedModule.id))
-        console.log("####")
         if(!! newSelectedModule){
             this.setState({
                 selectedModule: newSelectedModule
             })
         }
-        // if (!!newCourseState){
-        //     this.setState({
-        //         selectedModule : newCourseState.modules
-        //     })
-        // }
     }
 
-    // handleDeleteTopic=(moduleId, lessonId, topicId)=>{
-    //
-    //     const courseService = new CourseService();
-    //     const newCourseState = courseService.deleteModuleById(this.state.course.id, moduleId, lessonId, topicId)
-    //
-    //     if (!!newCourseState){
-    //         this.setState({
-    //             course : newCourseState
-    //         })
-    //     }
-    // }
+    handleDeleteTopic=( topicId)=>{
+        const courseService = new CourseService();
+        const newselectedModule = courseService.deleteTopicById(this.state.course.id, this.state.selectedModule.id, this.state.selectedLesson.id, topicId)
+        if (!!newselectedModule){
+            this.setState({
+                selectedModule : newselectedModule
+            })
+        }
+    }
 
     selectModule =(module,cb)=>{
         this.setState({
@@ -146,10 +120,7 @@ export default class CourseEditor extends Component {
     }
 
     updateModuleTitle=(newText)=>{
-
-
         const newModule = {...this.state.moduleToEdit, title : newText}
-
         this.setState({
             course :  this.courseService.updateModule(this.state.course.id, newModule)
         })
@@ -188,14 +159,13 @@ export default class CourseEditor extends Component {
                                                                       addNewLesson={this.addNewLesson}
                                                                       deleteLesson = {this.handleDeleteLesson}
                         />}
-
                         { !! this.state.selectedLesson && <TopicPills topics={this.state.selectedLesson.topics}
                                                                       selectTopic={this.selectTopic}
                                                                       selectedTopic={this.state.selectedTopic}
                                                                       courseId = {this.state.course.id}
                                                                       moduleId = {this.state.selectedModule.id}
-                                                                      lessonId = {this.state.selectedLesson.id}
                                                                       addNewTopic = {this.addNewTopic}
+                                                                      deleteTopic = {this.handleDeleteTopic}
                         />}
                         { !! this.state.selectedTopic && <WidgetList/>}
                         <div className="jumbotron jumbotron-fluid">

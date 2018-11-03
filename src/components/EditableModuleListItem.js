@@ -16,7 +16,6 @@ class EditableModuleListItem extends React.Component{
             {
                 !!this.props.selected ?
                     <EditableModule module={this.props.module} updateModuleTitle={ this.props.updateModuleTitle}/>:
-
                     <ModuleListItem
                     module={this.props.module}
                     deleteModule={this.props.deleteModule}
@@ -26,11 +25,9 @@ class EditableModuleListItem extends React.Component{
                     selected ={this.props.selected}
                     selectedModule = {this.props.selectedModule}
                     />
-
             }
         </div>
     }
-
 }
 
 export default   EditableModuleListItem

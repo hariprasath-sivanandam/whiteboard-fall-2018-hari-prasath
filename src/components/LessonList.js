@@ -48,26 +48,14 @@ export default class LessonList extends React.Component{
 
     deleteLesson=(index)=>{
         index = index -1 ; // index starts from 1 in output
-        console.log("index to remove : " + index);
-        console.log("Lessons before delete");
-        console.log(this.state.lessons);
-        console.log("Removing lesson in server   : "+ this.state.lessons[index]);
         // this.lessonServiceInstance
         this.lessonServiceInstance.deleteLesson(this.state.lessons[index].id).then(
             (response) =>{
                 if (response.status == 200)
                 {
-                    console.log("removing  ");
-                    console.log(this.state.lessons[index]);
-                    console.log("resetting state options -lesson");
                     let listAfterRemoval = this.state.lessons;
                     listAfterRemoval.splice(index,1);
-                    console.log("lessonList after removal");
-                    console.log(listAfterRemoval);
-
                     this.setState({lessons:  listAfterRemoval })
-
-
                 }
                 else{
                     alert("cannot delete ! Server issue");
@@ -77,61 +65,30 @@ export default class LessonList extends React.Component{
     }
 
     editLesson=(index,title,  updated)=>{
-
         index --; //compensation for index start base from 1
-
-        console.log("Lesson before edit");
-        console.log(this.state.lessons);
-
-
         if (index > -1 && index  <  this.state.lessons.length) {
             let newLessons = this.state.lessons;
             newLessons[index].title = title;
-
-            console.log("updating lesson : ");
-            console.log("before update ");
-            console.log(this.state.lessons[index]);
-
             let lesson = {
                 title : title
             }
-
-
             newLessons= this.state.lessons
             newLessons[index].title = title
-
             this.lessonServiceInstance.updateLesson(newLessons[index].id,newLessons[index]).then((response)=>{
-                console.log("Lesson :updated in server ")
-                console.log(response);
-
                 this.setState((state)=>{
-                    console.log("resetting state options");
                     return {lessons:  newLessons }
                 });
             } )
-
-
-            console.log("after update ");
-            console.log(this.state.lessons[index]);
-
         }
-
-        console.log("Lesson after edit");
-        console.log(this.state.lessons[index]);
     }
 
 
     componentDidMount(){
-
         this.setLessonList(this.props.lessons);
     }
 
     componentWillReceiveProps(nextProps)
     {
-        console.log("Lesson list receiving new props:");
-        console.log(nextProps.lessons);
-        console.log(nextProps.moduleId);
-
         if (nextProps.lessons!= null){
 
             this.setLessonList(nextProps.lessons);
@@ -143,8 +100,6 @@ export default class LessonList extends React.Component{
         }
     }
     setLessonList=(lessonList)=> {
-        console.log("Getting lessons for the module Id : " + this.props.moduleId);
-        console.log(lessonList);
         this.setState(()=> {return {lessons: lessonList}}
         )
     }

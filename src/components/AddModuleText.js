@@ -4,11 +4,9 @@ import CourseService from "../services/CourseService";
 export default  class AddModuleText extends React.Component{
     constructor(props){
         super(props)
-
         this.state = {
             currentText : ""
         }
-
     }
 
     handleAddNewModule = (courseId)=>{

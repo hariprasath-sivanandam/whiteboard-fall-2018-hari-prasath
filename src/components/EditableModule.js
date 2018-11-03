@@ -12,12 +12,7 @@ export default  class EditableModule extends React.Component{
     }
 
     handleUpdateModule = (courseId )=>{
-
         const newModule = {...this.props.module, title : this.state.currentText}
-        // (courseId, newModule)
-
-        // console.log(newModule)
-
     }
 
     componentDidMount(){
@@ -27,7 +22,6 @@ export default  class EditableModule extends React.Component{
     }
 
     updateCurrentState=(e)=>{
-        console.log(e.target.value)
         this.setState({
             currentText : e.target.value
 

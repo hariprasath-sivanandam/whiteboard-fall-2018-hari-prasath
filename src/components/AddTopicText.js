@@ -7,8 +7,6 @@ export default  class AddTopicText extends React.Component{
         this.state = {
             currentText : ""
         }
-        console.log("topics")
-        console.log(this.props)
     }
 
     handleAddNewTopic = (courseId, moduleId, lessonId)=>{
@@ -18,7 +16,7 @@ export default  class AddTopicText extends React.Component{
             title : this.state.currentText,
             widgets: []
         }
-        this.props.addNewTopic(courseId, moduleId, lessonId, newTopic)
+        this.props.addNewTopic(courseId, moduleId, newTopic)
     }
 
     updateCurrentState=(e)=>{
@@ -30,11 +28,16 @@ export default  class AddTopicText extends React.Component{
     render(){
         return <div>
             <li className="nav-item">
-                <input type="text" className="form-control" id="exampleInputEmail1"
-                       placeholder="New Topic name" onChange={this.updateCurrentState}></input>
-                <button className="btn btn-block btn-outline-primary"
-                        onClick={()=>this.handleAddNewTopic(this.props.courseId, this.props.moduleId, this.props.lessonId )}
-                        disabled={!this.state.currentText}> Add Topic </button>
+                <div className="pull-left">
+                    <input type="text" className="form-control" id="exampleInputEmail1"
+                           placeholder="New Topic name" onChange={this.updateCurrentState}></input>
+                </div>
+                <div className="pull-right">
+                    <button onClick={()=>this.handleAddNewTopic(this.props.courseId, this.props.moduleId, this.props.lessonId )}
+                            disabled={!this.state.currentText}>
+                        <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                    </button>
+                </div>
             </li>
         </div>
     }

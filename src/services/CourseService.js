@@ -11,11 +11,14 @@ let courses = [
                         title: 'Lesson 1',
                         id: 1234,
                         topics:[{
+                            id:"t1",
                             title: "topic 1"
                         }, {
+                            id:"t2",
                            title: "topic 2"
                             },
                             {
+                                id:"t3",
                             title: "topic 3"
                             }
 
@@ -78,9 +81,6 @@ export default class CourseService {
             course => course.id !== courseId
         )
     findCourseById(id){
-        // console.log("######")
-        // console.log(courses)
-        // console.log("######")
         return courses.find(course => course.id === id)
     }
     deleteModule = moduleToDelete => {
@@ -93,7 +93,6 @@ export default class CourseService {
     }
 
     addTopicByLessonId = (courseId, moduleId, lessonId, newTopic) =>{
-
         for (let i = 0; i < courses.length; i++)
         {
             if (courses[i].id===courseId)
@@ -120,7 +119,6 @@ export default class CourseService {
     }
 
     addLesssonByModuleId = (courseId, moduleId, newLesson)=> {
-        console.log(courseId, moduleId)
         for (let i = 0; i < courses.length; i++)
         {
             if (courses[i].id===courseId)
@@ -141,9 +139,6 @@ export default class CourseService {
     }
 
     addModuleByCourseId=(courseId, newModule)=>{
-
-        console.log(courseId)
-        console.log(newModule)
         for (let i = 0; i < courses.length; i++)
         {
             if (courses[i].id===courseId)
@@ -160,7 +155,51 @@ export default class CourseService {
     deleteLessonById=(courseId, moduleId, lessonId)=>{
         let newLessons = courses.find(course => course.id === courseId).
         modules.find(module=> module.id === moduleId).lessons.filter(lesson => {return lesson.id !== lessonId})
-        console.log(newLessons)
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                for (let j = 0; j < currentModules.length; j++)
+                {
+                    if (currentModules[j].id===moduleId) {
+                        currentModules[j].lessons = newLessons
+                        return currentModules[j];
+                    }
+                }
+            }
+        }
+    }
+
+    deleteTopicById=(courseId, moduleId, lessonId, topicId)=>{
+        let newtopics = courses.find(course => course.id === courseId).
+        modules.find(module=> module.id === moduleId).
+        lessons.find(lesson=> lesson.id === lessonId).
+        topics.filter(topic => {return topic.id !== topicId})
+        for (let i = 0; i < courses.length; i++)
+        {
+            if (courses[i].id===courseId)
+            {
+                let currentModules = courses[i].modules
+                for (let j = 0; j < currentModules.length; j++)
+                {
+                    if (currentModules[j].id===moduleId) {
+                        let currentLessons = currentModules[j].lessons
+                        for (let k = 0; k < currentLessons.length; k++) {
+                            if (currentLessons[j].id===lessonId) {
+                                currentLessons[j].topics = newtopics
+                                return currentModules[j];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    deleteLessonById=(courseId, moduleId, lessonId)=>{
+        let newLessons = courses.find(course => course.id === courseId).
+        modules.find(module=> module.id === moduleId).lessons.filter(lesson => {return lesson.id !== lessonId})
         for (let i = 0; i < courses.length; i++)
         {
             if (courses[i].id===courseId)
@@ -178,9 +217,6 @@ export default class CourseService {
     }
 
     deleteModuleById=(courseId, moduleId)=>{
-
-        console.log(courseId)
-        console.log(moduleId)
         for (let i = 0; i < courses.length; i++)
         {
             if (courses[i].id===courseId)
@@ -197,9 +233,6 @@ export default class CourseService {
     }
 
     updateModule=(courseId, module)=>{
-        // console.log("------")
-        // console.log(courses)
-        // console.log("-----")
         for(let i=0; i<courses.length;i++){
             if(courses[i].id === courseId){
                 for(let j=0; j<courses[i].modules.length;j++){
@@ -210,29 +243,8 @@ export default class CourseService {
                 }
             }
         }
-        // console.log("######")
-        // console.log(courses)
-        // console.log("######")
         return null;
-        // console.log(courseId)
-        // console.log(module)
-        //
-        // for (let i = 0; i < courses.length; i++)
-        // {
-        //     if (courses[i].id===courseId)
-        //     {
-        //         let currentModules = courses[i].modules
-        //         alert(module.id)
-        //         courses[i].modules[module.id] =  module
-        //
-        //         console.log(courses[i].modules)
-        //         return  courses[i];
-        //     }
-        // }
-        // return null;
     }
-
-
 
 
     findLessonsByCourseModuleId =(courseId, moduleId)=>{
@@ -243,17 +255,14 @@ export default class CourseService {
 
 
     addLesson=(courseId,moduleId)=>{
-
         return null
     }
 
     updateLesson=(courseId,moduleId, lessonId)=>{
-
         return null
     }
 
     deleteLesson=(courseId,moduleId, lessonId)=>{
-
         return null
     }
 
