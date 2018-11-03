@@ -11,11 +11,7 @@ export default class LessonListItem extends Component {
                 inEditMode: this.props.inEditMode
 
             }
-
         this.toggleEditMode = this.toggleEditMode.bind(this);
-        console.log(this.props);
-
-
     }
 
     toggleEditMode() {

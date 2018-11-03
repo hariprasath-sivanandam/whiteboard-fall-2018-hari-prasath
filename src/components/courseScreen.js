@@ -28,9 +28,6 @@ export default class courseScreen extends Component {
     }
 
     deleteCourse = courseToDelete => {
-        console.log("delete")
-        alert(JSON.stringify(courseToDelete))
-        console.log(this.courseService.deleteCourse(courseToDelete.id))
         this.setState({
             courses: this.courseService.deleteCourse(courseToDelete.id)
         })

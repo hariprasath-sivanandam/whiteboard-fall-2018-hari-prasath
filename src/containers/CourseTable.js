@@ -63,11 +63,6 @@ class CourseTable extends React.Component {
     findAllCourses() {
         let courses = this.courseService.findAllCourses();
         this.setState({courses: courses})
-        // this.courseService
-        //     .findAllCourses()
-        //     .then((courses) => {
-        //         this.setState({courses: courses});
-        //     });
     }
     render() {
         return (
