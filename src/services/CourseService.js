@@ -12,14 +12,40 @@ let courses = [
                         id: 1234,
                         topics:[{
                             id:"t1",
-                            title: "topic 1"
+                            title: "topic 1",
+                            widgets: [
+                                {
+                                    "type": "HEADING",
+                                    "size": 1,
+                                    "text": "The Document Object Model"
+                                },
+                                {
+                                    "type": "PARAGRAPH",
+                                    "text": "This topic introduces the DOM"
+                                },
+                                {
+                                    "type": "LIST",
+                                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
+                                },
+                                {
+                                    "type": "IMAGE",
+                                    "src": "https://picsum.photos/200"
+                                },
+                                {
+                                    "type": "LINK",
+                                    "title": "The DOM",
+                                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
+                                }
+                            ]
                         }, {
                             id:"t2",
-                           title: "topic 2"
+                           title: "topic 2",
+                            widgets:[]
                             },
                             {
                                 id:"t3",
-                            title: "topic 3"
+                            title: "topic 3",
+                                widgets:[]
                             }
 
                         ]
@@ -264,6 +290,26 @@ export default class CourseService {
 
     deleteLesson=(courseId,moduleId, lessonId)=>{
         return null
+    }
+
+    createWidget(topicId, widget){
+
+    }
+
+    findWidgets(topicId){
+
+    }
+
+    findWidgets(widgetId){
+
+    }
+
+    updateWidget(widgetId, widget){
+
+    }
+
+    deleteWidget(widgetId){
+
     }
 
 }
