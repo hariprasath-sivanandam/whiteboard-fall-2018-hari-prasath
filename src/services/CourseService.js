@@ -11,27 +11,32 @@ let courses = [
                         title: 'Lesson 1',
                         id: 1234,
                         topics:[{
-                            id:"t1",
+                            id:111,
                             title: "topic 1",
                             widgets: [
                                 {
+                                    id : 111,
                                     "type": "HEADING",
                                     "size": 1,
                                     "text": "The Document Object Model"
                                 },
                                 {
+                                    id : 222,
                                     "type": "PARAGRAPH",
                                     "text": "This topic introduces the DOM"
                                 },
                                 {
+                                    id : 333,
                                     "type": "LIST",
                                     "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
                                 },
                                 {
+                                    id : 444,
                                     "type": "IMAGE",
                                     "src": "https://picsum.photos/200"
                                 },
                                 {
+                                    id : 555,
                                     "type": "LINK",
                                     "title": "The DOM",
                                     "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
@@ -293,23 +298,83 @@ export default class CourseService {
     }
 
     createWidget(topicId, widget){
-
+        for (let i = 0; i < courses.length; i++){
+            for (let j = 0; j < courses[i].modules.length; j++) {
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
+                        if(courses[i].modules[j].lessons[k].topics[l].id === topicId){
+                            courses[i].modules[j].lessons[k].topics[l].widgets.push(widget) // check widget structure
+                            console.log(courses)
+                            return courses;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     findWidgets(topicId){
-
+        for (let i = 0; i < courses.length; i++){ // to iterate al courses
+            for (let j = 0; j < courses[i].modules.length; j++) { // to iterate all modules
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) { // to iterate all lessons
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){ // to iterate all topics
+                        if(courses[i].modules[j].lessons[k].topics[l].id === topicId){ // match topic
+                            return courses[i].modules[j].lessons[k].topics[l].widgets // return all widgets
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    findWidgets(widgetId){
-
+    findWidget(widgetId){
+        for (let i = 0; i < courses.length; i++){
+            for (let j = 0; j < courses[i].modules.length; j++) {
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
+                        for (let m = 0; m<courses[i].modules[j].lessons[k].topics[l].widgets.length; m++) {
+                            if (courses[i].modules[j].lessons[k].topics[l].widgets[m].id === widgetId) {
+                                return courses[i].modules[j].lessons[k].topics[l].widgets[m]
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     updateWidget(widgetId, widget){
-
+        for (let i = 0; i < courses.length; i++){
+            for (let j = 0; j < courses[i].modules.length; j++) {
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
+                        for (let m = 0; m<courses[i].modules[j].lessons[k].topics[l].widgets.length; m++) {
+                            if (courses[i].modules[j].lessons[k].topics[l].widgets[m].id === widgetId) {
+                                courses[i].modules[j].lessons[k].topics[l].widgets[m] = widget
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     deleteWidget(widgetId){
-
+        for (let i = 0; i < courses.length; i++){
+            for (let j = 0; j < courses[i].modules.length; j++) {
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
+                        let newWidgets=[]
+                        for (let m = 0; m<courses[i].modules[j].lessons[k].topics[l].widgets.length; m++) {
+                            if (courses[i].modules[j].lessons[k].topics[l].widgets[m].id !== widgetId) {
+                                newWidgets.push(courses[i].modules[j].lessons[k].topics[l].widgets[m])
+                            }
+                        }
+                        courses[i].modules[j].lessons[k].topics[l].widgets = newWidgets
+                    }
+                }
+            }
+        }
     }
 
 }

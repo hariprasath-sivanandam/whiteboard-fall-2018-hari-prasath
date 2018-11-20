@@ -1,6 +1,6 @@
 import React from 'react'
 
-class WidgetList extends React.Component {
+class widgetList extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -8,9 +8,10 @@ class WidgetList extends React.Component {
     render() {
         return(
             <div>
+
                 Widgets to be displayed here(via redux)
             </div>
         )
     }
 }
-export default WidgetList
+export default widgetList
