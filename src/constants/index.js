@@ -19,8 +19,6 @@ export const PARAGRAPH_NAME_CHANGED     = 'PARAGRAPH_NAME_CHANGED'
 export const LINK_TEXT_CHANGED          = 'LINK_TEXT_CHANGED'
 export const LINK_NAME_CHANGED          = 'LINK_NAME_CHANGED'
 export const INCREASE_ORDER_WIDGET      = 'INCREASE_ORDER_WIDGET'
+export const REORDER_WIDGET             = 'REORDER_WIDGET'
 export const HEADING  = "Heading"
 export const SAVE = 'SAVE'
-
-
-//update widget

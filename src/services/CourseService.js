@@ -16,30 +16,45 @@ let courses = [
                             widgets: [
                                 {
                                     id : 111,
-                                    "type": "HEADING",
+                                    "widgetType": "Heading",
                                     "size": 1,
-                                    "text": "The Document Object Model"
+                                    "text": "The Document Object Model",
+                                    "name": "Widget 123",
+                                    "widgetOrder": 1
                                 },
                                 {
                                     id : 222,
-                                    "type": "PARAGRAPH",
-                                    "text": "This topic introduces the DOM"
+                                    "widgetType": "Paragraph",
+                                    "text": "This topic introduces the DOM",
+                                    "name": "Widget 234",
+                                    "widgetOrder": 2
                                 },
                                 {
                                     id : 333,
-                                    "type": "LIST",
-                                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
+                                    "widgetType": "List",
+                                    "text": "This topic introduces the DOM \n The Document Object Model ",
+                                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes",
+                                    "listType": "ordered",
+                                    "name": "Widget 345",
+                                    "widgetOrder": 3
                                 },
                                 {
                                     id : 444,
-                                    "type": "IMAGE",
-                                    "src": "https://picsum.photos/200"
+                                    "widgetType": "Image",
+                                    "src": "https://picsum.photos/200",
+                                    "text": "https://cdn.dribbble.com/users/27716/screenshots/1177084/hello.png",
+                                    "name": "Widget 456",
+                                    "widgetOrder": 4
                                 },
                                 {
                                     id : 555,
-                                    "type": "LINK",
+                                    "widgetType": "Link",
+                                    "linkName": "testlink",
+                                    "text": "test link text",
                                     "title": "The DOM",
-                                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
+                                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model",
+                                    "name": "Widget 567",
+                                    "widgetOrder": 5
                                 }
                             ]
                         }, {
@@ -277,13 +292,11 @@ export default class CourseService {
         return null;
     }
 
-
     findLessonsByCourseModuleId =(courseId, moduleId)=>{
         courses.find((course)=>{
             return course.id== courseId
         })
     }
-
 
     addLesson=(courseId,moduleId)=>{
         return null
@@ -376,17 +389,60 @@ export default class CourseService {
     }
 
     deleteWidget(widgetId){
+        let track_idx;
         for (let i = 0; i < courses.length; i++){
             for (let j = 0; j < courses[i].modules.length; j++) {
                 for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
                     for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
                         let newWidgets=[]
                         for (let m = 0; m<courses[i].modules[j].lessons[k].topics[l].widgets.length; m++) {
+                            if (courses[i].modules[j].lessons[k].topics[l].widgets[m].id > widgetId){
+                                courses[i].modules[j].lessons[k].topics[l].widgets[m].widgetOrder--;
+                            }
                             if (courses[i].modules[j].lessons[k].topics[l].widgets[m].id !== widgetId) {
                                 newWidgets.push(courses[i].modules[j].lessons[k].topics[l].widgets[m])
                             }
                         }
+                        console.log("delete widgets--------")
+                        console.log(newWidgets);
                         courses[i].modules[j].lessons[k].topics[l].widgets = newWidgets
+                    }
+                }
+            }
+        }
+    }
+
+    moveWidget(topicId, newOrder, oldOrder){
+        let i = 0, j=0, k=0, l=0, m=0;
+        for (; i < courses.length; i++) {
+            for (; j < courses[i].modules.length; j++) {
+                for (; k < courses[i].modules[j].lessons.length; k++) {
+                    for (; l < courses[i].modules[j].lessons[k].topics.length; l++) {
+                        if(courses[i].modules[j].lessons[k].topics[l].id === topicId ){
+                            console.log("etst moveWidget")
+                            console.log(newOrder)
+                            console.log(courses[i].modules[j].lessons[k].topics[l].widgets)
+                            if(newOrder<=0 || newOrder>courses[i].modules[j].lessons[k].topics[l].widgets.length){
+                                return courses[i].modules[j].lessons[k].topics[l].widgets
+                            }
+                            let new_idx, old_idx;
+                            for (; m < courses[i].modules[j].lessons[k].topics[l].widgets.length; m++) {
+                                if(courses[i].modules[j].lessons[k].topics[l].widgets[m].widgetOrder == newOrder){
+                                    new_idx = m
+                                }
+                                else if (courses[i].modules[j].lessons[k].topics[l].widgets[m].widgetOrder == oldOrder){
+                                    old_idx = m
+                                }
+                            }
+                            courses[i].modules[j].lessons[k].topics[l].widgets[old_idx].widgetOrder = newOrder
+                            courses[i].modules[j].lessons[k].topics[l].widgets[new_idx].widgetOrder = oldOrder
+                            let tempWidgets = courses[i].modules[j].lessons[k].topics[l].widgets
+                            tempWidgets.sort(function(a,b){
+                                return a.widgetOrder - b.widgetOrder;
+                            })
+                            courses[i].modules[j].lessons[k].topics[l].widgets = tempWidgets
+                            return tempWidgets
+                        }
                     }
                 }
             }

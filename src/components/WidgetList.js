@@ -1,20 +1,3 @@
-// import React from 'react'
-//
-// class WidgetList extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//
-//     render() {
-//         return(
-//             <div>
-//                 Widgets to be displayed here(via redux)
-//             </div>
-//         )
-//     }
-// }
-// export default WidgetList
-
 import React from 'react'
 import {connect} from 'react-redux'
 import * as constants from "../constants/index"
@@ -24,9 +7,10 @@ import ImageContainer from "./ImageWidget";
 import ParaContainer from "./ParagraphWidget";
 import LinkContainer from "./LinkWidget";
 import HeadingContainer from "./HeadingWidget";
+import * as actions from "../actions";
 
 
-const Widget = ({widget, preview, dispatch,widgetLength}) => {
+const Widget = ({widget, preview, dispatch,widgetLength, topicId}) => {
     let selectElement
     return(
 
@@ -46,22 +30,16 @@ const Widget = ({widget, preview, dispatch,widgetLength}) => {
                                         )} className="btn btn-danger"><i className="fa  fa-times"></i></button>
                                     </div>
 
-
                                     <div className="d-inline-flex pr-2 float-right">
-                                        <button onClick={e => (
-                                            dispatch({type: constants.INCREASE_ORDER_WIDGET, widgetOrder: widget.widgetOrder})
-                                        )} disabled={(widget.widgetOrder == widgetLength)} className="btn btn-warning"><i
-                                            className="fa  fa-arrow-down"></i></button>
+                                        <button onClick={e => {actions.reOrderWidget(dispatch, topicId, widget.widgetOrder+1,widget.widgetOrder)}
+                                        } className="btn btn-warning"><i className="fa  fa-arrow-down"></i></button>
                                     </div>
 
 
                                     <div className="d-inline-flex pr-2 float-right">
-                                        <button onClick={e => (
-                                            dispatch({type: constants.DECREASE_ORDER_WIDGET, widgetOrder: widget.widgetOrder})
-                                        )} disabled={(widget.widgetOrder == 1)} className="btn btn-warning"><i
-                                            className="fa  fa-arrow-up"></i></button>
+                                        <button onClick={e => {actions.reOrderWidget(dispatch, topicId, widget.widgetOrder-1,widget.widgetOrder)}
+                                        } className="btn btn-warning"><i className="fa  fa-arrow-up"></i></button>
                                     </div>
-
 
                                     <div className="d-inline-flex pr-1 float-right my-auto widgetListStyle" >
                                         <select value={widget.widgetType}

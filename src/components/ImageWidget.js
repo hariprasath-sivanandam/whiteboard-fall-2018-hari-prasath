@@ -26,7 +26,7 @@ const Image = ({widget, preview, imageTextChanged, imageNameChanged}) => {
                             <div className="form-group">
                                 <input onChange={() => imageTextChanged(widget.id, inputElem3.value)}
                                        ref={node3 => inputElem3= node3}
-                                       placeholder="https://goo.gl/ZdEZ93"
+                                       placeholder="https://cdn.dribbble.com/users/27716/screenshots/1177084/hello.png"
                                        value={widget.text} className="form-control"
                                 /> <br/>
                             </div>

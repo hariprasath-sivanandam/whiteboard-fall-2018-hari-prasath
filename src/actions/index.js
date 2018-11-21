@@ -1,6 +1,5 @@
 import * as constants from "../constants/index"
 import CourseService from "../services/CourseService";
-//import WidgetService from "../services/WidgetService";
 
 const courseServiceInstance = new CourseService()
 ///////////////////////////////////////// Heading //////////////////////////////////////////////////////////////////////
@@ -126,10 +125,17 @@ export const paraNameChanged = (dispatch,widgetId,newName) =>(
 /////////////////////////////////////// Paragraph End //////////////////////////////////////////////////////////////////
 
  export const findAllWidgetsForTopic = (dispatch,topicId) => {
-        console.log("findAllWidgets")
     const widgets = courseServiceInstance.findWidgets(topicId);
      dispatch({
         type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
+        widgets: widgets });
+}
+
+export const reOrderWidget = (dispatch,topicId, new_order, old_order) => {
+    //alert(JSON.stringify(widgets));
+    const widgets = courseServiceInstance.moveWidget(topicId, new_order, old_order);
+    dispatch({
+        type: constants.REORDER_WIDGET,
         widgets: widgets });
 }
 

@@ -45,33 +45,35 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             }
 
         case constants.INCREASE_ORDER_WIDGET:
+            courseServiceInstance.moveWidget(action.widgetOrder+1, action.widgetOrder)
             return {
-                widgets: state.widgets.map(widget => {
-                    if(widget.widgetOrder == action.widgetOrder) {
-                        widget.widgetOrder = widget.widgetOrder + 1;
-                        return Object.assign({}, widget)
-                    }
-                    if(widget.widgetOrder == (action.widgetOrder+1)){
-                        widget.widgetOrder = widget.widgetOrder - 1;
-                        return Object.assign({}, widget)
-                    }
-                    return Object.assign({}, widget)
-                }).sort(function(a,b) {return (a.widgetOrder > b.widgetOrder) ? 1 : ((b.widgetOrder > a.widgetOrder) ? -1 : 0);} )
+                // widgets: state.widgets.map(widget => {
+                //     if(widget.widgetOrder == action.widgetOrder) {
+                //         widget.widgetOrder = widget.widgetOrder + 1;
+                //         return Object.assign({}, widget)
+                //     }
+                //     if(widget.widgetOrder == (action.widgetOrder+1)){
+                //         widget.widgetOrder = widget.widgetOrder - 1;
+                //         return Object.assign({}, widget)
+                //     }
+                //     return Object.assign({}, widget)
+                // }).sort(function(a,b) {return (a.widgetOrder > b.widgetOrder) ? 1 : ((b.widgetOrder > a.widgetOrder) ? -1 : 0);} )
             }
 
         case constants.DECREASE_ORDER_WIDGET:
+            courseServiceInstance.moveWidget(action.widgetOrder-1, action.widgetOrder);
             return {
-                widgets: state.widgets.map(widget => {
-                    if(widget.widgetOrder == action.widgetOrder) {
-                        widget.widgetOrder = widget.widgetOrder - 1;
-                        return Object.assign({}, widget)
-                    }
-                    if(widget.widgetOrder == (action.widgetOrder-1)){
-                        widget.widgetOrder = widget.widgetOrder + 1;
-                        return Object.assign({}, widget)
-                    }
-                    return Object.assign({}, widget)
-                }).sort(function(a,b) {return (a.widgetOrder > b.widgetOrder) ? 1 : ((b.widgetOrder > a.widgetOrder) ? -1 : 0);} )
+                // widgets: state.widgets.map(widget => {
+                //     if(widget.widgetOrder == action.widgetOrder) {
+                //         widget.widgetOrder = widget.widgetOrder - 1;
+                //         return Object.assign({}, widget)
+                //     }
+                //     if(widget.widgetOrder == (action.widgetOrder-1)){
+                //         widget.widgetOrder = widget.widgetOrder + 1;
+                //         return Object.assign({}, widget)
+                //     }
+                //     return Object.assign({}, widget)
+                // }).sort(function(a,b) {return (a.widgetOrder > b.widgetOrder) ? 1 : ((b.widgetOrder > a.widgetOrder) ? -1 : 0);} )
             }
 
         case constants.IMAGE_TEXT_CHANGED:
@@ -216,8 +218,16 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
 
         case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
             newState = Object.assign({}, state)
+
             newState.widgets = action.widgets
             return newState
+
+        case constants.REORDER_WIDGET:
+            // newState.widgets = action.widgets
+            return {...state,
+                widgets: [
+                    ...state.widgets]
+            }
 
 
         case constants.DELETE_WIDGET:
@@ -236,8 +246,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 text: 'New Widget',
                 name: 'widget' + milliSec.toString(),
                 widgetType: 'Heading',
-                size: '2',
-                listType: 'ordered',
+                size: '1',
                 widgetOrder: state.widgets.length + 1
             }
             courseServiceInstance.createWidget(action.topicId,tempWidget)

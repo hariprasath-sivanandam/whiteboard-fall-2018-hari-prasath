@@ -10,12 +10,6 @@ import WidgetList from "../components/WidgetList";
 
 let store = createStore(widgetReducer,applyMiddleware(logger));
 
-
-// const saveToServer=(saveFunction, topicId=> {
-//     saveFunction(topicId)
-// }
-
-
 var  WidgetListContainer =(props)=> {
     console.log(props.findAllWidgetsForTopic(props.topicId))
         return (
@@ -57,7 +51,9 @@ var  WidgetListContainer =(props)=> {
                                      <WidgetList widget={widget}
                                                 preview={props.previewMode}
                                                 key={widget.id}
-                                                widgetLength={props.widgets.length}/>
+                                                widgetLength={props.widgets.length}
+                                                 topicId={props.topicId}
+                                     />
                                      )
                                  )}
                         </div>
