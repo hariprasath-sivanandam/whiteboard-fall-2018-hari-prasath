@@ -3,7 +3,7 @@ import ModuleList from '../components/ModuleList'
 import CourseService from "../services/CourseService";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
-import WidgetListContainer from "../containers/WidgetListContainer";
+import WidgetListContainerStateless from "./WidgetListContainerStateless";
 //import WidgetList from "../components/WidgetList";
 
 export default class CourseEditor extends Component {
@@ -168,18 +168,9 @@ export default class CourseEditor extends Component {
                                                                       addNewTopic = {this.addNewTopic}
                                                                       deleteTopic = {this.handleDeleteTopic}
                         />}
-                        {/*{ !! this.state.selectedTopic && <WidgetList/>}*/}
-                        {/*<div className="jumbotron jumbotron-fluid">*/}
-                            {/*<div className="container">*/}
-                                {/*<h1 className="display-4">Fluid jumbotron</h1>*/}
-                                {/*<p className="lead">This is a modified jumbotron that occupies the entire horizontal*/}
-                                    {/*space of its parent.</p>*/}
-                            {/*</div>*/}
-                        {/*</div>*/}
-DLdskl
                         {!!this.state.selectedTopic &&
                         <div className=" card widgetContainer row  py-2 container mx-auto">
-                            <WidgetListContainer
+                            <WidgetListContainerStateless
                                 course         =   { this.state.course}
                                 module         =   { this.state.selectedModule}
                                 lesson         =   { this.state.selectedLesson}

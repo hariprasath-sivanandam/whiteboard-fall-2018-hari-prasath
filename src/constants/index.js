@@ -1,5 +1,5 @@
 export const DELETE_WIDGET              = 'DELETE_WIDGET'
-export const ADD_WIDGET                 = 'ADD_WIDGET' //create widget
+export const CREATE_WIDGET              = 'CREATE_WIDGET' //create widget
 export const FIND_ALL_WIDGETS_FOR_TOPIC = 'FIND_ALL_WIDGETS_FOR_TOPIC'
 
 export const DECREASE_ORDER_WIDGET      = 'DECREASE_ORDER_WIDGET'

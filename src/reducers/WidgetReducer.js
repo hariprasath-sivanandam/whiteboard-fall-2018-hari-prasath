@@ -1,8 +1,10 @@
 import * as constants from "../constants/index"
 import CourseService from "../services/CourseService";
 //
+
+
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
-    const courseServiceInstance = CourseService.instance
+    const courseServiceInstance = new CourseService();
 
     switch (action.type) {
         case constants.PREVIEW:
@@ -197,11 +199,9 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             }
         }
 
-
-
         case constants.SELECT_WIDGET_TYPE:
             let newState = {
-                widgets: state.widgets.filter((widget) => {
+                    widgets: state.widgets.filter((widget) => {
                     if(widget.id === action.id) {
                         widget.widgetType = action.widgetType
                     }
@@ -228,14 +228,14 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 ))
             }
 
-        case constants.ADD_WIDGET:
+        case constants.CREATE_WIDGET:
 
             const milliSec = new Date().getTime();
             const tempWidget =  {
                 id: state.widgets.length + 1,
                 text: 'New Widget',
                 name: 'widget' + milliSec.toString(),
-                widgetType: 'Paragraph',
+                widgetType: 'Heading',
                 size: '2',
                 listType: 'ordered',
                 widgetOrder: state.widgets.length + 1

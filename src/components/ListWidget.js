@@ -1,4 +1,4 @@
-import * as actions from "../../actions";
+import * as actions from "../actions";
 import {connect} from "react-redux";
 import React from 'react';
 

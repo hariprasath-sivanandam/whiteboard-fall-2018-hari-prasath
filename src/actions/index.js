@@ -1,6 +1,8 @@
 import * as constants from "../constants/index"
+import CourseService from "../services/CourseService";
 //import WidgetService from "../services/WidgetService";
 
+const courseServiceInstance = new CourseService()
 ///////////////////////////////////////// Heading //////////////////////////////////////////////////////////////////////
 export const headingNameChanged = (dispatch, widgetId, newName) => (
     dispatch({
@@ -125,22 +127,22 @@ export const paraNameChanged = (dispatch,widgetId,newName) =>(
 
  export const findAllWidgetsForTopic = (dispatch,topicId) => {
         console.log("findAllWidgets")
-//     const widgetServiceInstance = WidgetService.instance;
-//
-//
-//     widgetServiceInstance.findAllWidgetsForTopic(topicId).then(widgets => dispatch({
-//         type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
-//         widgets: widgets }))
+    const widgets = courseServiceInstance.findWidgets(topicId);
+     dispatch({
+        type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
+        widgets: widgets });
 }
 
 
-export const addWidget = (dispatch,topicId)=> (
-    dispatch({type: constants.ADD_WIDGET, topicId:topicId})
+export const createWidget = (dispatch,topicId)=> (
+    dispatch({type: constants.CREATE_WIDGET, topicId:topicId})
 )
+
 export const save = (dispatch,topicId) => (
     dispatch({type: constants.SAVE,
         topicId : topicId})
 )
+
 export const preview = dispatch => (
     dispatch({type: constants.PREVIEW})
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as actions from "../../actions";
+import * as actions from "../actions";
 import {connect} from "react-redux";
 
 const Image = ({widget, preview, imageTextChanged, imageNameChanged}) => {

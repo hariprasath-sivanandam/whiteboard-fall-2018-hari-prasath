@@ -313,6 +313,22 @@ export default class CourseService {
         }
     }
 
+    saveWidgetsForTopic(topicId, tempWidgets){
+        for (let i = 0; i < courses.length; i++){
+            for (let j = 0; j < courses[i].modules.length; j++) {
+                for (let k = 0; k < courses[i].modules[j].lessons.length; k++) {
+                    for(let l = 0; l< courses[i].modules[j].lessons[k].topics.length; l++){
+                        if(courses[i].modules[j].lessons[k].topics[l].id === topicId){
+                            courses[i].modules[j].lessons[k].topics[l].widgets = tempWidgets
+                            console.log(courses)
+                            return courses;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     findWidgets(topicId){
         for (let i = 0; i < courses.length; i++){ // to iterate al courses
             for (let j = 0; j < courses[i].modules.length; j++) { // to iterate all modules
